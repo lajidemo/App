@@ -2,6 +2,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const autoprefixer = require('autoprefixer');
+// const pxtorem = require('postcss-pxtorem');
 
 module.exports = {
   mode:'development',//指定环境，生成：production
@@ -39,7 +41,21 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader','css-loader','postcss-loader'],
+        use: [
+          'style-loader','css-loader', 'postcss-loader',
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     plugins: [
+          //       autoprefixer(),
+          //       pxtorem({
+          //         rootValue: 75,
+          //         propList: ['*']
+          //       })
+          //     ]
+          //   }
+          // }
+        ],
         exclude: /node_modules/,
       },{
         test: /\.(js|jsx)$/,
@@ -53,6 +69,26 @@ module.exports = {
         test: /\.(sass|scss)$/,
         use: ['style-loader','css-loader','postcss-loader','sass-loader'],
         exclude: /node_modules/,
+      },{
+        test: /\.less$/,
+        // use: ['style-loader','css-loader','postcss-loader','less-loader'],
+        use: [
+          'style-loader','css-loader','postcss-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                modifyVars: {
+                  // 直接覆盖变量
+                  'text-color': '#9da8ef',
+                  'border-color': '#d874b7',
+                },
+              },
+            }
+          },
+        ],
+        // exclude: /node_modules/,
       },{
         test: /\.(png|jpg|gif|svg|jpeg)$/,
         use: {
