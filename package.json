@@ -1,14 +1,14 @@
 {
-  "name": "app",
+  "name": "{{name}}",
   "version": "1.0.0",
-  "description": "",
+  "description": "{{description}}",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "{{author}}",
   "license": "ISC",
   "postcss": {
     "plugins": {
@@ -34,12 +34,16 @@
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    {{#if less}}
     "less": "^3.11.1",
     "less-loader": "^6.1.0",
+    {{/if}}
+    {{#if sass}}
     "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    {{/if}}
     "postcss-loader": "^3.0.0",
     "postcss-pxtorem": "^5.1.1",
-    "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "vue-loader": "^15.9.2",
